@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
 
+
 const SocialMediaButton = ({onPress, source, type}) =>
     <TouchableOpacity 
     onPress={onPress}

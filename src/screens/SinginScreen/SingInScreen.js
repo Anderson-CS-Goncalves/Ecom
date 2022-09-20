@@ -1,15 +1,21 @@
 import React, {useState} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
-import Logo from "../../../assets/images/LogoEcom.png";
+
+import { Ionicons } from "@expo/vector-icons"
+import Logo from "../../../assets/images/ecom-logo-DF4A3FF5B3-seeklogo.com.png";
 import FacebookLogo from "../../../assets/images/facebook.png";
 import GoogleLogo from "../../../assets/images/google.png"
+
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import SocialMediaButton from "../../components/SocialMediaButton";
+import ClickableText from "../../components/ClickableText";
+
 
 const SignInScreen = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('')
 
     const {height} = useWindowDimensions();
 
@@ -28,6 +34,10 @@ const onSignInGoogle = () => {
     console.warn('google')
 }
 
+const onSignUpPressed = () => {
+    console.warn('cadastrar')
+}
+
     return (
         <View style={styles.root}>
             <Image 
@@ -37,25 +47,33 @@ const onSignInGoogle = () => {
             />
 
             <CustomInput 
-            placeholder="Nome de usuário ou Email" 
-            value={username} 
-            setValue={setUsername}
+            value={username}
+            onChangeText={setUsername}
+            icon={"person-sharp"}
+            placeholder="Nome de usuário ou Email"
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="email-address"
             />
-            <CustomInput 
-            placeholder="Senha" 
-            value={password} 
-            setValue={setPassword}
-            secureTextEntry={true}
+            <CustomInput
+            icon={"lock-closed"} 
+            placeholder="Senha"
+            autoCapitalize="none"
+            autoCorrect={false}
+            secureTextEntry
+            keyboardType="default"
             />
 
             <CustomButton 
             onPress={onSignInPressed}
             text='Login'
             />
-            <CustomButton
+          
+            <ClickableText 
             onPress={onForgotPasswordPressed}
-            text='Esqueci minha senha'
-            type="tertiary"
+            text="Esqueci minha "
+            ClickableText="senha"
+            type="right"
             />
 
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -79,11 +97,13 @@ const onSignInGoogle = () => {
                 />
             </View>
 
-            <CustomButton
-            onPress={onForgotPasswordPressed}
-            text='Não é cadastrado? Criar conta'
-            type="tertiary"
+            <ClickableText 
+            onPress={onSignUpPressed}
+            text="Não é cadastrado? " 
+            ClickableText="Criar conta"
+            type="center"
             />
+
         </View>
     );
 };
