@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons"
 import Logo from "../../../assets/images/ecom-logo-DF4A3FF5B3-seeklogo.com.png";
 import FacebookLogo from "../../../assets/images/facebook.png";
 import GoogleLogo from "../../../assets/images/google.png"
@@ -10,17 +9,28 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import SocialMediaButton from "../../components/SocialMediaButton";
 import ClickableText from "../../components/ClickableText";
+import Toast from "../../components/Toast";
+
+import { showToast } from '../../store/modules/Toast/actions'
+import { useDispatch } from "react-redux";
 
 
 const SignInScreen = () => {
+    const dispatch = useDispatch();
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('')
 
     const {height} = useWindowDimensions();
 
+    function login(){
+        if(email == ''){
+
+        }
+    }
+
 const onSignInPressed = () => {
-    console.warn('oioi');
+    console.warn('login');
 }
 const onForgotPasswordPressed = () => {
     console.warn('senha')
@@ -40,6 +50,9 @@ const onSignUpPressed = () => {
 
     return (
         <View style={styles.root}>
+ 
+            <Toast />
+
             <Image 
                 source={Logo} 
                 style={[styles.logo, {height: height * 0.3}]} 

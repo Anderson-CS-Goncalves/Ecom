@@ -3,11 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
 
 
 const SocialMediaButton = ({onPress, source, type}) =>
+
     <TouchableOpacity 
+    activeOpacity={1}
     onPress={onPress}
     style={styles[`container_${type}`]}>
         <Image source={source}  style={styles.img}/>
     </TouchableOpacity>;
+
 
 const styles = StyleSheet.create({
     img: {
@@ -21,7 +24,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 15,
         backgroundColor: "#4267B2",
         alignItems: 'center',
-        justifyContent: "center"
+        justifyContent: "center",
     },
     container_google: {
         width: '45%',
