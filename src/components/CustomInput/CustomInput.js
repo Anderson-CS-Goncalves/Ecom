@@ -1,19 +1,32 @@
-import {React, useState} from "react";
+import {React, useState, forwardRef, useImperativeHandle, createRef} from "react";
 import { View, StyleSheet, TextInput, TouchableOpacity} from "react-native";
 import { Ionicons } from "@expo/vector-icons"
 
-const CustomInput = (props) => {
+const CustomInput = forwardRef((props, ref) => {
     const [secText, setSecText] = useState(props.secureTextEntry);
+    const [error, setError] = useState(false);
+    const inputref = createRef();
+
+    useImperativeHandle(ref,() => ({
+        focusOnError(){
+            setError(true);
+            inputref.current.focus();
+        },
+        resetError(){
+            setError(false)
+        }
+    }))
     return (
         <View style={styles.container}>
             <TextInput 
-                style={styles.input}
+                style={[styles.input, {borderColor: error ? '#e91e63' : '#BFBFBF'}]}
+                ref={inputref}
                 underlineColorAndroid="transparent"
                 placeholderTextColor={"#BFBFBF"}
                 {...props}
                 secureTextEntry={secText}
             />
-            <Ionicons name={props.icon} size={18} color={"black"} style={styles.icon}/>
+            <Ionicons name={props.icon} size={18} color={error ? '#e91e63' : 'black'} style={styles.icon}/>
             {props.secureTextEntry && (
                 <TouchableOpacity
                 onPress={() => setSecText(!secText)}
@@ -22,13 +35,13 @@ const CustomInput = (props) => {
                     <Ionicons 
                     name={secText ? "eye-sharp" : "eye-off-sharp"} 
                     size={24} 
-                    color={"black"} 
+                    color={error ? '#e91e63' : 'black'} 
                     style={styles.iconSecret}/>
                 </TouchableOpacity>
             )}
         </View>
     )
-}       
+});       
 
 
 

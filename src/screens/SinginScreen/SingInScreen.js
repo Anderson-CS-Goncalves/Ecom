@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {createRef, useState, useEffect} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
 
 import Logo from "../../../assets/images/ecom-logo-DF4A3FF5B3-seeklogo.com.png";
@@ -18,19 +18,33 @@ import { useDispatch } from "react-redux";
 const SignInScreen = () => {
     const dispatch = useDispatch();
     
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const emailInput = createRef();
+    const passwordInput = createRef();
+
+    useEffect(() => emailInput.current.resetError(), [email])
+    useEffect(() => passwordInput.current.resetError(), [password])
 
     const {height} = useWindowDimensions();
 
     function login(){
         if(email == ''){
-
+            dispatch(showToast('Email inválido', 'error', 'person-sharp'));
+            emailInput.current.focusOnError();
+            return;
+        }
+        if(password == ''){
+            dispatch(showToast('Senha inválida', 'error', 'lock-closed'));
+            passwordInput.current.focusOnError();
+            return;
         }
     }
 
 const onSignInPressed = () => {
     console.warn('login');
+    login()
 }
 const onForgotPasswordPressed = () => {
     console.warn('senha')
@@ -60,8 +74,9 @@ const onSignUpPressed = () => {
             />
 
             <CustomInput 
-            value={username}
-            onChangeText={setUsername}
+            ref={emailInput}
+            value={email}
+            onChangeText={setEmail}
             icon={"person-sharp"}
             placeholder="Nome de usuário ou Email"
             autoCapitalize="none"
@@ -69,6 +84,9 @@ const onSignUpPressed = () => {
             keyboardType="email-address"
             />
             <CustomInput
+            ref={passwordInput}
+            value={password}
+            onChangeText={setPassword}
             icon={"lock-closed"} 
             placeholder="Senha"
             autoCapitalize="none"
@@ -90,11 +108,11 @@ const onSignUpPressed = () => {
             />
 
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <View style={{flex: 1, height: 1, backgroundColor: '#D9D9D9'}} />
+            <View style={{flex: 1, marginLeft:10, height: 1, backgroundColor: '#D9D9D9'}} />
             <View>
                 <Text style={{width: 50, textAlign: 'center', color: '#D9D9D9'}}>OU</Text>
             </View>
-            <View style={{flex: 1, height: 1, backgroundColor: '#D9D9D9'}} />
+            <View style={{flex: 1, marginRight:10, height: 1, backgroundColor: '#D9D9D9'}} />
             </View>
             
             <View style={styles.social_media_container}>

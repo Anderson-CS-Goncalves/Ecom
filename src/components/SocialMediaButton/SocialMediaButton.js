@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         width: '45%',
         padding: 10,
         borderRadius: 12,
-        marginHorizontal: 15,
+        marginHorizontal: 10,
         backgroundColor: "#4267B2",
         alignItems: 'center',
         justifyContent: "center",
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     container_google: {
         width: '45%',
         padding: 10,
-        marginHorizontal: 15,
+        marginHorizontal: 10,
         borderRadius: 12,
         backgroundColor: "#FFFFFF",
         alignItems: 'center',
