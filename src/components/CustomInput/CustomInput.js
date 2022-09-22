@@ -14,7 +14,10 @@ const CustomInput = forwardRef((props, ref) => {
         },
         resetError(){
             setError(false)
-        }
+        },
+        focusOn(){
+            inputref.current.focus();
+        },
     }))
     return (
         <View style={styles.container}>
@@ -25,6 +28,8 @@ const CustomInput = forwardRef((props, ref) => {
                 placeholderTextColor={"#BFBFBF"}
                 {...props}
                 secureTextEntry={secText}
+                onSubmitEditing={props.onSubmitEditing}
+                returnKeyType={props.returnKeyType}
             />
             <Ionicons name={props.icon} size={18} color={error ? '#e91e63' : 'black'} style={styles.icon}/>
             {props.secureTextEntry && (
@@ -33,7 +38,7 @@ const CustomInput = forwardRef((props, ref) => {
                 style={styles.viewPassword}
                 >
                     <Ionicons 
-                    name={secText ? "eye-sharp" : "eye-off-sharp"} 
+                    name={secText ? "eye-off-sharp" : "eye-sharp"} 
                     size={24} 
                     color={error ? '#e91e63' : 'black'} 
                     style={styles.iconSecret}/>

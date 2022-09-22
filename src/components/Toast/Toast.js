@@ -12,7 +12,7 @@ var timer = null;
 const Toast = () => {
     const colors = {
         success: '#62D9AD',
-        warn: '#FD951F',
+        warn: '#FF0000',
         error: '#E91E63',
         default: '#F2F2F2'};
 
@@ -50,16 +50,9 @@ const Toast = () => {
             setStyleStatusBar('light-content')
         });
     }
-    
-    function zIndex(val){
-        return Platform.select({
-            ios: {zIndex: val},
-            android: {elevation: val},
-        })
-    }
 
     return (
-        <View style={{...zIndex(100)}}>
+        <View style={{zIndex: 100}}>
             <StatusBar 
             barStyle={styleStatusBar} 
             translucent={true} 
@@ -107,7 +100,7 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 14,
         marginHorizontal: 10,
-    }
+    },
 })
 
 export default Toast

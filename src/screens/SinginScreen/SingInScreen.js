@@ -82,6 +82,9 @@ const onSignUpPressed = () => {
             autoCapitalize="none"
             autoCorrect={false}
             keyboardType="email-address"
+            returnKeyType="next"
+            onSubmitEditing={() => passwordInput.current.focusOn()}
+            blurOnSubmit={false}
             />
             <CustomInput
             ref={passwordInput}
@@ -93,6 +96,7 @@ const onSignUpPressed = () => {
             autoCorrect={false}
             secureTextEntry
             keyboardType="default"
+            returnKeyType="done"
             />
 
             <CustomButton 
