@@ -2,15 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
 
 
-const SocialMediaButton = ({onPress, source, type}) =>
-
-    <TouchableOpacity 
-    activeOpacity={1}
-    onPress={onPress}
-    style={styles[`container_${type}`]}>
-        <Image source={source}  style={styles.img}/>
-    </TouchableOpacity>;
-
+const SocialMediaButton = ({onPress, source, type}) => {
+    return (
+        <TouchableOpacity 
+        activeOpacity={1}
+        onPress={onPress}
+        style={styles[`container_${type}`]}>
+            <Image source={source}  style={styles.img}/>
+        </TouchableOpacity>
+    )
+}
 
 const styles = StyleSheet.create({
     img: {

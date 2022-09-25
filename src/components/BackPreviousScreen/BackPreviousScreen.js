@@ -18,14 +18,14 @@ const styles = StyleSheet.create({
         marginVertical: 40,
         alignItems: 'center',
         justifyContent: 'flex-start',
-        width: '110%',
+        width: '100%',
     },
     icon: {
         marginHorizontal: 8
     },
     text: {
-        fontSize: 20,
-        color: '#62D9AD'
+        fontSize: 16,
+        color: '#BFBFBF'
     },
     text_clickable: {
         color: "#62D9AD"

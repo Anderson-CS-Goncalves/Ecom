@@ -1,5 +1,6 @@
 import React, {createRef, useState, useEffect} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Logo from "../../../assets/images/ecom-logo-DF4A3FF5B3-seeklogo.com.png";
 import FacebookLogo from "../../../assets/images/facebook.png";
@@ -28,6 +29,8 @@ const SignInScreen = () => {
     useEffect(() => passwordInput.current.resetError(), [password])
 
     const {height} = useWindowDimensions();
+
+    const navigation = useNavigation();
 
     function login(){
         if(email == ''){
@@ -60,6 +63,8 @@ const onSignInGoogle = () => {
 
 const onSignUpPressed = () => {
     console.warn('cadastrar')
+    //validation
+    navigation.navigate('SignUpScreen')
 }
 
     return (
@@ -157,7 +162,7 @@ const styles = StyleSheet.create({
     },
     social_media_container: {
         marginTop: 20,
-        marginBottom: 20,
+        marginBottom: 40,
         flexDirection: "row",
         justifyContent: "center"
     }
