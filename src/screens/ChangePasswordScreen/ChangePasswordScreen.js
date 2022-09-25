@@ -1,5 +1,6 @@
 import React, {createRef, useState, useEffect} from "react";
-import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
@@ -12,10 +13,9 @@ import Reload from '../../../assets/images/reload.png'
 import { showToast } from '../../store/modules/Toast/actions'
 import { useDispatch } from "react-redux";
 
-
 const ChangePasswordScreen = () => {
-
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,7 +26,7 @@ const ChangePasswordScreen = () => {
     useEffect(() => passwordInput.current.resetError(), [password])
     useEffect(() => confirmPasswordInput.current.resetError(), [confirmPassword])
 
-    function signUp(){
+    function changePassword(){
         if(password == ''){
             dispatch(showToast('Senha inválida', 'error', 'lock-closed'));
             passwordInput.current.focusOnError();
@@ -39,9 +39,11 @@ const ChangePasswordScreen = () => {
         }
     }
 
-    const onSignUpPressed = () => {
-        console.warn('cadastrar')
-        signUp()
+    const onChangePasswordPressed = () => {
+        console.warn('senha mudada')
+        changePassword()
+        //verificação
+        navigation.navigate('ChangedPasswordScreen')
     }
 
     return (
@@ -80,10 +82,9 @@ const ChangePasswordScreen = () => {
             returnKeyType="done"
             />
 
-
             <CustomButton 
-            onPress={onSignUpPressed}
-            text='Enviar'
+            onPress={onChangePasswordPressed}
+            text='Atualizar'
             />
         </View>
     );

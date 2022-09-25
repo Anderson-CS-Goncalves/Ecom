@@ -1,6 +1,6 @@
 import React, {createRef, useState, useEffect} from "react";
-import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
-
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
@@ -10,11 +10,10 @@ import Toast from "../../components/Toast";
 
 import { showToast } from '../../store/modules/Toast/actions'
 import { useDispatch } from "react-redux";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-
 
 const SignUpScreen = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -36,8 +35,6 @@ const SignUpScreen = () => {
     useEffect(() => birthdayInput.current.resetError(), [birthday])
     useEffect(() => passwordInput.current.resetError(), [password])
     useEffect(() => confirmPasswordInput.current.resetError(), [confirmPassword])
-
-    const {height} = useWindowDimensions();
 
     function signUp(){
         if(username == ''){
@@ -72,15 +69,19 @@ const SignUpScreen = () => {
         }
     }
 
-const onSignUpPressed = () => {
-    console.warn('cadastrar')
-    signUp()
-}
 const onTermsUsePressed = () => {
     console.warn('termos de uso')
 }
 const onPrivacyPressed = () => {
     console.warn('politica de privacidade')
+}
+const onSignUpPressed = () => {
+    console.warn('cadastrar')
+    signUp()
+}
+const onAlreadyAccountPressed = () => {
+    console.warn('ja tenho conta')
+    navigation.navigate('SignInScreen')
 }
 
     return (
@@ -88,7 +89,7 @@ const onPrivacyPressed = () => {
  
             <Toast />
 
-            <BackPreviousScreen text="Cadastrar"/>
+            <BackPreviousScreen text="Criar nova conta"/>
 
             <Text style={styles.cadastro}>Cadastrar</Text>
 
@@ -189,7 +190,7 @@ const onPrivacyPressed = () => {
             <View style={styles.space}></View>
 
             <ClickableText 
-            onPress={onSignUpPressed}
+            onPress={onAlreadyAccountPressed}
             text="Já possui cadastro? " 
             ClickableText="Acessar conta"
             type="center"

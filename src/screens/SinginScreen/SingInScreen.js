@@ -15,9 +15,10 @@ import Toast from "../../components/Toast";
 import { showToast } from '../../store/modules/Toast/actions'
 import { useDispatch } from "react-redux";
 
-
 const SignInScreen = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
+    const {height} = useWindowDimensions();
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -27,10 +28,6 @@ const SignInScreen = () => {
 
     useEffect(() => emailInput.current.resetError(), [email])
     useEffect(() => passwordInput.current.resetError(), [password])
-
-    const {height} = useWindowDimensions();
-
-    const navigation = useNavigation();
 
     function login(){
         if(email == ''){
@@ -51,16 +48,14 @@ const onSignInPressed = () => {
 }
 const onForgotPasswordPressed = () => {
     console.warn('senha')
+    navigation.navigate('ForgotPasswordScreen')
 }
-
 const onSignInFacebook = () => {
     console.warn('facebook')
 }
-
 const onSignInGoogle = () => {
     console.warn('google')
 }
-
 const onSignUpPressed = () => {
     console.warn('cadastrar')
     //validation

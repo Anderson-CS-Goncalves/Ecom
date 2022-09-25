@@ -1,5 +1,6 @@
 import React, {createRef, useState, useEffect} from "react";
-import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
+import { View, StyleSheet} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
@@ -14,8 +15,8 @@ import { useDispatch } from "react-redux";
 
 
 const ForgotPasswordScreen = () => {
-
     const dispatch = useDispatch();
+    const navigation = useNavigation();
     
     const [email, setEmail] = useState('');
 
@@ -23,7 +24,7 @@ const ForgotPasswordScreen = () => {
 
     useEffect(() => emailInput.current.resetError(), [email])
 
-    function signUp(){
+    function SendCode(){
         if(email == ''){
             dispatch(showToast('Email inválido', 'error', 'mail'));
             emailInput.current.focusOnError();
@@ -31,9 +32,11 @@ const ForgotPasswordScreen = () => {
         }
     }
 
-    const onSignUpPressed = () => {
-        console.warn('cadastrar')
-        signUp()
+    const onSendCodePressed = () => {
+        console.warn('enviado para o email')
+        SendCode()
+        //verificaçao
+        navigation.navigate('VerificationCodeScreen')
     }
 
     return (
@@ -58,7 +61,7 @@ const ForgotPasswordScreen = () => {
             />
 
             <CustomButton 
-            onPress={onSignUpPressed}
+            onPress={onSendCodePressed}
             text='Enviar'
             />
         </View>
