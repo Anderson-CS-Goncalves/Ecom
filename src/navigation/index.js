@@ -8,6 +8,13 @@ import VerificationCodeScreen from '../screens/VerificationCodeScreen/Verificati
 import ChangedPasswordScreen from '../screens/ChangedPasswordScreen/ChangedPasswordScreen';
 import HomeScreen from '../screens/HomeScreen';
 import Router from '../components/Router';
+import About from '../screens/Configs/About';
+import EditProfile from '../screens/Configs/EditProfile';
+import Help from '../screens/Configs/Help';
+import Language from '../screens/Configs/Language';
+import Notifications from '../screens/Configs/Notifications';
+import Security from '../screens/Configs/Security';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +30,12 @@ const Navigation = () => {
         <Stack.Screen name='VerificationCodeScreen' component={VerificationCodeScreen} />
         <Stack.Screen name='ChangedPasswordScreen' component={ChangedPasswordScreen} />
         <Stack.Screen name='Router' component={Router}  />
+        <Stack.Screen name='About' component={About}  />
+        <Stack.Screen name='EditProfile' component={EditProfile}  />
+        <Stack.Screen name='Help' component={Help}  />
+        <Stack.Screen name='Language' component={Language}  />
+        <Stack.Screen name='Notifications' component={Notifications}  />
+        <Stack.Screen name='Security' component={Security}  />
         <Stack.Screen name='HomeScreen' component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
