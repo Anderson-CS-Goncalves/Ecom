@@ -2,20 +2,51 @@ import React, {createRef, useState, useEffect} from "react";
 import { View, Text, Image, StyleSheet, useWindowDimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import * as WebBrowser from 'expo-web-browser';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 import Logo from "../../../assets/images/ecom-logo-DF4A3FF5B3-seeklogo.com.png";
-import FacebookLogo from "../../../assets/images/facebook.png";
-import GoogleLogo from "../../../assets/images/google.png"
 
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
-import SocialMediaButton from "../../components/SocialMediaButton";
 import ClickableText from "../../components/ClickableText";
 import Toast from "../../components/Toast";
+import FacebookSignIn from "./FacebookSignIn";
+import GoogleSignIn from "./GoogleSignIn";
+
 
 import { showToast } from '../../store/modules/Toast/actions'
 import { useDispatch } from "react-redux";
 
+
+initializeApp({
+    apiKey: "AIzaSyD9qHO-j4RWGSTg249gciTIm5i48MRdIMQ",
+  
+    authDomain: "bd-tcc-3ds.firebaseapp.com",
+  
+    databaseURL: "https://bd-tcc-3ds-default-rtdb.firebaseio.com",
+  
+    projectId: "bd-tcc-3ds",
+  
+    storageBucket: "bd-tcc-3ds.appspot.com",
+  
+    messagingSenderId: "44715367004",
+  
+    appId: "1:44715367004:web:d7aab22261d34c5738e499",
+  
+    measurementId: "G-KV2ZDWBD3H"
+  });
+
+WebBrowser.maybeCompleteAuthSession();
+
 const SignInScreen = () => {
+    const profile = {
+        userEmail : String,
+        userName : String,
+        userPhoto : String,
+      }
+
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const {height} = useWindowDimensions();
@@ -41,24 +72,42 @@ const SignInScreen = () => {
             return;
         }
     }
+    
+    const auth = getAuth();
+    const SignInWithEmail = () => {
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const profile = {
+                        userEmail : user.email,
+                        userName : user.displayName,
+                        userPhoto : user.photoURL,
+                      }
+                    navigation.navigate('Router', {profile})
+                }
+                else {
+                  console.warn('erro')
+                  navigation.goBack()
+                }
+              })
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+    }
 
-const onSignInPressed = () => {
-    console.warn('login');
-    login()
+const onSignInPressed = () => {;
+    SignInWithEmail()
 }
 const onForgotPasswordPressed = () => {
     console.warn('senha')
     navigation.navigate('ForgotPasswordScreen')
 }
-const onSignInFacebook = () => {
-    console.warn('facebook')
-}
-const onSignInGoogle = () => {
-    console.warn('google')
-}
 const onSignUpPressed = () => {
-    console.warn('cadastrar')
-    //validation
+    console.warn('cadastro')
     navigation.navigate('SignUpScreen')
 }
 
@@ -100,7 +149,7 @@ const onSignUpPressed = () => {
             />
 
             <CustomButton 
-            onPress={onSignInPressed}
+            onPress={SignInWithEmail}
             text='Login'
             />
           
@@ -120,16 +169,8 @@ const onSignUpPressed = () => {
             </View>
             
             <View style={styles.social_media_container}>
-                <SocialMediaButton 
-                onPress={onSignInFacebook}
-                source={FacebookLogo}
-                type="facebook"
-                />
-                <SocialMediaButton 
-                onPress={onSignInGoogle}
-                source={GoogleLogo}
-                type="google"
-                />
+                <FacebookSignIn />
+                <GoogleSignIn />
             </View>
 
             <ClickableText 

@@ -1,6 +1,9 @@
 import React, {createRef, useState, useEffect} from "react";
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute  } from "@react-navigation/native";
+import { getAuth, updateProfile, createUserWithEmailAndPassword } from 'firebase/auth';
+import { ResponseType } from 'expo-auth-session';
+import { initializeApp } from 'firebase/app';
 
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
@@ -8,12 +11,33 @@ import ClickableText from "../../components/ClickableText";
 import BackPreviousScreen from "../../components/BackPreviousScreen";
 import Toast from "../../components/Toast";
 
+
 import { showToast } from '../../store/modules/Toast/actions'
 import { useDispatch } from "react-redux";
+import { useAuthRequestResult } from "expo-auth-session/build/AuthRequestHooks";
+
+initializeApp({
+    apiKey: "AIzaSyD9qHO-j4RWGSTg249gciTIm5i48MRdIMQ",
+  
+    authDomain: "bd-tcc-3ds.firebaseapp.com",
+  
+    databaseURL: "https://bd-tcc-3ds-default-rtdb.firebaseio.com",
+  
+    projectId: "bd-tcc-3ds",
+  
+    storageBucket: "bd-tcc-3ds.appspot.com",
+  
+    messagingSenderId: "44715367004",
+  
+    appId: "1:44715367004:web:d7aab22261d34c5738e499",
+  
+    measurementId: "G-KV2ZDWBD3H"
+  });
 
 const SignUpScreen = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
+    route = useRoute();
     
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -35,6 +59,30 @@ const SignUpScreen = () => {
     useEffect(() => birthdayInput.current.resetError(), [birthday])
     useEffect(() => passwordInput.current.resetError(), [password])
     useEffect(() => confirmPasswordInput.current.resetError(), [confirmPassword])
+
+    const auth = getAuth();
+    const CreateUser = () => {
+        createUserWithEmailAndPassword(auth, email, password )
+        .then(() => {
+            console.warn('account created')
+
+            user = auth.currentUser;
+            updateProfile(user, {
+                displayName: username, 
+                phoneNumber: phoneNumber,
+                photoURL: "https://example.com/jane-q-user/profile.jpg"
+              }).then(() => {
+                console.warn('profile updated')
+                console.log(user)
+              }).catch((error) => {
+                console.log(error)
+              });
+            console.log(user)
+        })
+         .catch(error => {
+            console.log(error)
+         })
+     }
 
     function signUp(){
         if(username == ''){
@@ -84,9 +132,11 @@ const onAlreadyAccountPressed = () => {
     navigation.navigate('SignInScreen')
 }
 
+
+
     return (
         <View style={styles.root}>
- 
+
             <Toast />
 
             <BackPreviousScreen text="Criar nova conta"/>
@@ -183,8 +233,7 @@ const onAlreadyAccountPressed = () => {
             />
 
             <CustomButton 
-            onPress={onSignUpPressed}
-            text='Cadastrar'
+            onPress={CreateUser}
             />
 
             <View style={styles.space}></View>
@@ -212,7 +261,7 @@ const styles = StyleSheet.create({
     },
     space: {
         marginTop: 60
-    }
+    },
 })
 
 export default SignUpScreen;

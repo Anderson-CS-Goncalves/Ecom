@@ -2,7 +2,9 @@ import React from "react";
 import { SafeAreaView, StyleSheet, Text } from "react-native";
 import Navigation from "./src/navigation";
 import { Provider } from "react-redux";
+import DataMarkers from "./src/components/CustomMarkers/DataMarkers";
 
+import 'expo-dev-client'
 import store from "./src/store";
 
 const App = () => {
@@ -12,7 +14,6 @@ const App = () => {
           <Navigation />
        </SafeAreaView>
       </Provider>
-
     );
 };
 
