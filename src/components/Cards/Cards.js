@@ -4,8 +4,9 @@ import { StyleSheet, Image, Text, View, TouchableOpacity} from 'react-native';
 import '../Translate/i18n'
 import { useTranslation } from 'react-i18next'
 import CustomRatingBar from '../CustomRating/CustomRating';
+import RatingStars from '../RatingStars';
 
-const Cards = ({preco, dias, nomePosto, endereco, distancia, icone}) => {
+const Cards = ({preco, dias, nomePosto, endereco, distancia, icone, avaliacao}) => {
   const {t, i18n} = useTranslation();
 
   const [defaultRating, setdefaultRating] = useState(0)
@@ -20,10 +21,7 @@ const Cards = ({preco, dias, nomePosto, endereco, distancia, icone}) => {
         <View style={styles.preco}>
             <Text style={styles.numb}>R${preco}</Text>
             <Text style={styles.dias}>{dias}{t(' dias atrás')}</Text> 
-            <Image
-              style={styles.iconAvali}
-              source={require('../../../assets/images/avali.png')}
-            />
+            <RatingStars ratio={avaliacao}/>
         </View>
 
         <View style={styles.lineDiv} />
@@ -101,12 +99,6 @@ const styles = StyleSheet.create({
     dias:{
       fontSize: 10,
       color: '#BFBFBF',
-    },
-
-    iconAvali:{
-      height: 15,
-      width: 75,
-      marginLeft: 5,
     },
   kmSalvo:{
     marginTop: 15,

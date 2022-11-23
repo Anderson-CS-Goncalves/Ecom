@@ -25,18 +25,22 @@ const Stations = () => {
           let cardInfo = {
             nome: posto.key,
             endereco: posto.child('Endereco'),
-            bandeira: posto.child('Bandeira')
+            bandeira: posto.child('Bandeira'),
+            avaliacao: posto.child('NotaGeral')
           }
           listacards.push(cardInfo)
         });
         listacards.forEach((item) => {
           var nomeString = item.nome 
+          var avaliacaoString = JSON.stringify(item.avaliacao)
           var enderecoString = JSON.stringify(item.endereco)
           var bandeiraString = JSON.stringify(item.bandeira)
+          var avaliacaoNumber = Number(avaliacaoString)
           let cardsInfo = {
             nome: nomeString,
             endereco: enderecoString,
-            bandeira: bandeiraString
+            bandeira: bandeiraString,
+            avaliacao: avaliacaoNumber
           }
           listaCards.push(cardsInfo)
         });
@@ -50,6 +54,7 @@ const Stations = () => {
     })
   },[])
 
+  
     return (
       <View>
       <SearchBar />  
@@ -66,6 +71,7 @@ const Stations = () => {
             nomePosto={marker.nome}
             endereco={marker.endereco}
             distancia={1}
+            avaliacao={marker.avaliacao}
             icone={require('../../../assets/images/stations/Shell.png')}
             /> )
           }
@@ -77,6 +83,7 @@ const Stations = () => {
               nomePosto={marker.nome}
               endereco={marker.endereco}
               distancia={1}
+              avaliacao={marker.avaliacao}
               icone={require('../../../assets/images/stations/Sete-Estrelas.png')}
               /> )
           }
@@ -88,6 +95,7 @@ const Stations = () => {
               nomePosto={marker.nome}
               endereco={marker.endereco}
               distancia={1}
+              avaliacao={marker.avaliacao}
               icone={require('../../../assets/images/stations/BR.png')}
               /> )
           }
@@ -99,6 +107,7 @@ const Stations = () => {
               nomePosto={marker.nome}
               endereco={marker.endereco}
               distancia={1}
+              avaliacao={marker.avaliacao}
               icone={require('../../../assets/images/stations/Ipiranga.png')}
               /> )
           }
@@ -110,6 +119,7 @@ const Stations = () => {
               nomePosto={marker.nome}
               endereco={marker.endereco}
               distancia={1}
+              avaliacao={marker.avaliacao}
               icone={require('../../../assets/images/stations/Shell.png')}
               /> )
           }
