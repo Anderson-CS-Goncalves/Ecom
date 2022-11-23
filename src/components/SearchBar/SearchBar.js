@@ -11,7 +11,6 @@ const SearchBar = () => {
     const [visibleModal, setVisibleModal] = useState(false); 
     return(
       <View style={styles.pesquisa}>
-                <View style={{ height: 2, backgroundColor: '#3E619B', marginTop: 2,}} />
   
   
       <View style={styles.menu}>
@@ -53,27 +52,27 @@ const SearchBar = () => {
 const styles = StyleSheet.create({
 
     pesquisa:{
+      marginTop: 45,
       backgroundColor: '#62D9AD',
       width: '100%',
       height: 70,
       flexDirection: "row",
       justifyContent: 'center',
+      alignItems: 'center'
     },
 
     menu: {
-      width: 300,
+      width: '80%',
       height: 45,
-      marginTop: 10,
       backgroundColor: '#5EBF9B',
-      borderRadius: 10,
-      flexDirection: "row"
-
+      borderRadius: 8,
+      flexDirection: "row",
+      alignItems: 'center'
     },
     
     algumPosto:{
       marginLeft: 10,
       justifyContent: 'center',
-      marginTop: 10,
       flex: 1,
       color: '#fff',
     },
@@ -81,18 +80,14 @@ const styles = StyleSheet.create({
     iconPes: {
       width: 25,
       height: 25,
-      marginTop: 10,
       marginLeft: 10,
       marginRight: 10,
-      textAlign:'left',
     },
 
     iconFil:{
       width: 25,
       height: 25,
-      marginTop: 20,
-      marginLeft: 35,
-      marginRight: 20,
+      marginLeft: 25,
     },
 
     TextInput:{
