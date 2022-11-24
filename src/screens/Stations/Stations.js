@@ -26,12 +26,18 @@ const Stations = () => {
             nome: posto.key,
             endereco: posto.child('Endereco'),
             bandeira: posto.child('Bandeira'),
-            avaliacao: posto.child('NotaGeral')
+            avaliacao: posto.child('NotaGeral'),
+            etanol: posto.child('precos').child('Etanol'),
+            gasolina: posto.child('precos').child('Gasolina')
           }
           listacards.push(cardInfo)
         });
         listacards.forEach((item) => {
           var nomeString = item.nome 
+          var etanolString = JSON.stringify(item.etanol)
+          var etanolNumber = Number(etanolString)
+          var gasolinaString = JSON.stringify(item.gasolina)
+          var gasolinaNumber = Number(gasolinaString)
           var avaliacaoString = JSON.stringify(item.avaliacao)
           var enderecoString = JSON.stringify(item.endereco)
           var bandeiraString = JSON.stringify(item.bandeira)
@@ -40,7 +46,9 @@ const Stations = () => {
             nome: nomeString,
             endereco: enderecoString,
             bandeira: bandeiraString,
-            avaliacao: avaliacaoNumber
+            avaliacao: avaliacaoNumber,
+            etanol: etanolNumber,
+            gasolina: gasolinaNumber
           }
           listaCards.push(cardsInfo)
         });
@@ -66,7 +74,7 @@ const Stations = () => {
           if(marker.bandeira === '"Shell"'){
             return( <Cards 
             key={index}
-            preco={5.44}
+            preco={marker.etanol}
             dias={12}
             nomePosto={marker.nome}
             endereco={marker.endereco}
@@ -78,7 +86,7 @@ const Stations = () => {
           else if(marker.bandeira === '"Sete Estrelas"'){
             return( <Cards 
               key={index}
-              preco={5.44}
+              preco={marker.etanol}
               dias={12}
               nomePosto={marker.nome}
               endereco={marker.endereco}
@@ -90,7 +98,7 @@ const Stations = () => {
           else if(marker.bandeira === '"BR"'){
             return( <Cards 
               key={index}
-              preco={5.44}
+              preco={marker.etanol}
               dias={12}
               nomePosto={marker.nome}
               endereco={marker.endereco}
@@ -102,7 +110,7 @@ const Stations = () => {
           else if(marker.bandeira === '"Ipiranga"'){
             return( <Cards 
               key={index}
-              preco={5.44}
+              preco={marker.etanol}
               dias={12}
               nomePosto={marker.nome}
               endereco={marker.endereco}
@@ -114,7 +122,7 @@ const Stations = () => {
           else {
             return( <Cards 
               key={index}
-              preco={5.44}
+              preco={marker.gasolina}
               dias={12}
               nomePosto={marker.nome}
               endereco={marker.endereco}

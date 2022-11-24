@@ -67,9 +67,9 @@ const styles = StyleSheet.create({
   
     iconBan:{
       marginTop: 2,
-      marginLeft: 0,
       height: 35,
       width: 40,
+      borderRadius: 6
     },
 
     nomePosto: {
