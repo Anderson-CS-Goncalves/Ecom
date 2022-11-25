@@ -1,16 +1,37 @@
 import { StyleSheet, Text, View, Dimensions,Image, TurboModuleRegistry  } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Ref } from 'react';
 import { getDatabase, ref, child, get, set, onValue} from 'firebase/database';
 import MapView, { Callout, Marker, MarkerAnimated } from 'react-native-maps';
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
+
 const Map = () => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+
   const dbRef = ref(getDatabase());
   const [postos, setPostos] = useState([]);
   const [listar, setListar] = useState([]);
   let listaposto = [];
   let listalocais = []
-  
+
 
   useEffect(()=>{
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+    })();
+
     get(child(dbRef, `postos`)).then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((posto)=>{
@@ -38,10 +59,8 @@ const Map = () => {
             bandeira: bandeiraString
           }
           listalocais.push(localizacao)
-          //console.log(listalocais)
         });
         setListar(listalocais)
-        //console.log(listalocais)
       } else {
         console.log("No data")
       }
@@ -49,16 +68,13 @@ const Map = () => {
       console.error(error);
     })
   },[])
-  
+
   return (
       <MapView 
       style={styles.map}
-      region={{
-        latitude: -22.934872952347487,
-        longitude: -45.46696829324074,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}>
+      initialRegion={location}
+      showsUserLocation={true}
+      >
 
         {listar.map((marker, index) => {
           if(marker.bandeira === '"Shell"'){
