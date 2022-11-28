@@ -12,70 +12,70 @@ const RatingStars = ({ratio}) => {
             source={require('../../../assets/images/rating/0.png')}/>
           )
     }
-    else if(ratio > 0 && ratio <= 0.5) {
+    else if(ratio > 0.4 && ratio <= 0.7) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/0-5.png')}/>
           )
     }
-    else if(ratio > 0.5 && ratio <= 1) {
+    else if(ratio > 0.7 && ratio <= 1.2) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/1.png')}/>
           )
     }
-    else if(ratio > 1 && ratio <= 1.5) {
+    else if(ratio > 1.2 && ratio <= 1.7) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/1-5.png')}/>
           )
     }
-    else if(ratio > 1.5 && ratio <= 2) {
+    else if(ratio > 1.7 && ratio <= 2.2) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/2.png')}/>
           )
     }
-    else if(ratio > 2 && ratio <= 2.5) {
+    else if(ratio > 2.2 && ratio <= 2.7) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/2-5.png')}/>
           )
     }
-    else if(ratio > 2.5 && ratio <= 3) {
+    else if(ratio > 2.7 && ratio <= 3.2) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/3.png')}/>
           )
     }
-    else if(ratio > 3 && ratio <= 3.5) {
+    else if(ratio > 3.2 && ratio <= 3.7) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/3-5.png')}/>
           )
     }
-    else if(ratio > 3.5 && ratio <= 4) {
+    else if(ratio > 3.7 && ratio <= 4.2) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/4.png')}/>
           )
     }
-    else if(ratio > 4 && ratio <= 4.5) {
+    else if(ratio > 4.2 && ratio <= 4.7) {
         return (
             <Image 
             style={styles.iconAvali}
             source={require('../../../assets/images/rating/4-5.png')}/>
           )
     }
-    else if(ratio > 4.5 && ratio <= 5) {
+    else if(ratio > 4.7 && ratio <= 5) {
         return (
             <Image 
             style={styles.iconAvali}

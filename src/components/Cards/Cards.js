@@ -49,7 +49,7 @@ const Cards = ({preco, dias, nomePosto, endereco, distancia, icone, avaliacao}) 
 const styles = StyleSheet.create({
     container: {
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     card: {
       marginTop:15,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     descricao:{
       marginTop: 10,
       marginLeft: 10,
-      width: 240,
+      width: 230,
     },
   
     iconBan:{
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   kmSalvo:{
     marginTop: 15,
     alignItems: 'center',
-    width: 30,
+    width: 50,
   },
 
   iconSalvo:{
