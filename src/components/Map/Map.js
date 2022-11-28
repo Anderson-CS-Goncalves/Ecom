@@ -78,16 +78,17 @@ const Map = () => {
       style={styles.map}
       initialRegion={userLocation}
       showsUserLocation={true}
+      zoomEnabled={true}
       >
 
         {listar.map((marker, index) => {
           if(marker.bandeira === '"Shell"'){
             return(
               <Marker
+                icon={require('../../../assets/images/markers/Shell.png')}
                 key={index}
                 coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                 title={marker.nome}
-                image={require('../../../assets/images/markers/Shell.png')}
                 style={styles.marker}
                 />
              )
@@ -98,7 +99,7 @@ const Map = () => {
                 key={index}
                 coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                 title={marker.nome}
-                image={require('../../../assets/images/markers/Ipiranga.png')}
+                icon={require('../../../assets/images/markers/Ipiranga.png')}
                 style={styles.marker}
                 />
              )
@@ -109,7 +110,7 @@ const Map = () => {
                 key={index}
                 coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                 title={marker.nome}
-                image={require('../../../assets/images/markers/br.png')}
+                icon={require('../../../assets/images/markers/br.png')}
                 style={styles.marker}
                 />
              )
@@ -120,7 +121,7 @@ const Map = () => {
                 key={index}
                 coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                 title={marker.nome}
-                image={require('../../../assets/images/markers/7estrela.png')}
+                icon={require('../../../assets/images/markers/7estrela.png')}
                 style={styles.marker}
                 />
              )

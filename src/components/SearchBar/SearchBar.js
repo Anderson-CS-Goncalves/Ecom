@@ -1,20 +1,26 @@
 import React, {useState} from 'react';
 import { StyleSheet, Image, Text, View, TouchableOpacity, TextInput, Alert, Modal } from 'react-native';
 import ActionModal from "./ModalFilter";
+import { useNavigatio } from '@react-navigation/native'
 
 import '../Translate/i18n'
 import { useTranslation } from 'react-i18next'
 
-const SearchBar = () => {
+const SearchBar = ({onChangeText}) => {
     const {t, i18n} = useTranslation();
-
     const [visibleModal, setVisibleModal] = useState(false); 
+
     return(
       <View style={styles.pesquisa}>
   
   
       <View style={styles.menu}>
-        <TextInput style={styles.algumPosto} placeholder={t('Algum Posto Especifico')} color='white' placeholderTextColor="#fff" >
+        <TextInput 
+        onChangeText={onChangeText}
+        style={styles.algumPosto} 
+        placeholder={t('Algum Posto Especifico')} 
+        color='white' 
+        placeholderTextColor="#fff" >
         </TextInput>
   
         <TouchableOpacity

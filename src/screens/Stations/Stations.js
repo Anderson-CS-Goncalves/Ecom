@@ -22,6 +22,26 @@ const Stations = () => {
     let listaCards = [];
     const [userLocation, setUserLocation] = useState({});
     const [errorMsg, setErrorMsg] = useState(null);
+    const [searchText, setSearchText] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
+  
+  useEffect(() => {
+    if(searchText === '') {
+      setFilteredData(listar)
+    } else {
+       setFilteredData(
+        listar.filter((item) => {
+          if(item.nome.indexOf(searchText) > -1) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+       );
+    }
+  }, [searchText]);
+
+  console.log(filteredData)
 
   useEffect(()=>{
     (async () => {
@@ -97,18 +117,16 @@ const Stations = () => {
         console.error(error);
       })
     })();
+  },[]) 
 
-
-  },[])
-  
     return (
       <View>
-      <SearchBar />  
+      <SearchBar onChangeText={(t) => setSearchText(t)}/>  
       <ScrollView>
         <View style={styles.container}>
         <StatusBar backgroundColor='#e0e0e0' style="auto" />
 
-        {loading ? listar.map((marker, index) => {
+        {loading ? filteredData.map((marker, index) => {
           if(marker.bandeira === '"Shell"'){
             return( <Cards 
             key={index}
