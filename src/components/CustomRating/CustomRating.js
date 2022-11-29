@@ -25,7 +25,6 @@ const CustomRatingBar = () => {
               key={item}
               onPress={() => setdefaultRating(item)}
               >
-
                   <Image style={styles.starImgStyle}  
                   onPress={() =>{Alert.alert(defaultRating + '/' + maxRating.length);}}
                   source={
@@ -46,8 +45,6 @@ const CustomRatingBar = () => {
   };
 
   const styles = StyleSheet.create({
-  
-  
     card: {
       marginTop: 10,
       height: 120,
@@ -155,6 +152,7 @@ const CustomRatingBar = () => {
   customRatingBarstyle: {
     justifyContent: 'center',
     flexDirection: 'row',
+    backgroundColor: 'red'
   },
   starImgStyle:{
     width: 20,

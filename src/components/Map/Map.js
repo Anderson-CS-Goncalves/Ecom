@@ -1,23 +1,20 @@
-import { StyleSheet, Text, View, Dimensions,Image, TurboModuleRegistry  } from 'react-native';
-import React, { useState, useEffect, Ref } from 'react';
-import { getDatabase, ref, child, get, set, onValue} from 'firebase/database';
-import MapView, { Callout, Marker, MarkerAnimated } from 'react-native-maps';
+import { StyleSheet, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { getDatabase, ref, child, get} from 'firebase/database';
+import MapView, { Marker} from 'react-native-maps';
 import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
-import MapViewDirections from 'react-native-maps-directions'
-import config from '../../../config'
-import { getDistance } from 'geolib'
-
 const Map = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-
   const dbRef = ref(getDatabase());
-  const [postos, setPostos] = useState([]);
   const [listar, setListar] = useState([]);
-  let listaposto = [];
   let listalocais = []
-
+  const imagesPath = {
+    1: require('../../../assets/images/markers/Shell.png'),
+    2: require('../../../assets/images/markers/7estrela.png'),
+    3: require('../../../assets/images/markers/br.png'),
+    4: require('../../../assets/images/markers/Ipiranga.png')
+  };
 
   useEffect(()=>{
     (async () => {
@@ -34,35 +31,17 @@ const Map = () => {
         longitudeDelta: 0.0421,
       });
     })();
-
     get(child(dbRef, `postos`)).then((snapshot) => {
       if (snapshot.exists()) {
         snapshot.forEach((posto)=>{
           let location = {
             nome: posto.key,
-            id: posto.child('Tel'),
-            latitude: posto.child('Lat'),
-            longitude: posto.child('Long'),
-            bandeira: posto.child('Bandeira')
+            id: JSON.stringify(posto.child('Tel')),
+            latitude: Number(JSON.stringify(posto.child('Lat'))),
+            longitude: Number(JSON.stringify(posto.child('Long'))),
+            bandeira: JSON.stringify(posto.child('Bandeiraa')),
           }
-          listaposto.push(location)
-        });
-        listaposto.forEach((item) => {
-
-          var itemString = JSON.stringify(item.id)
-          var latitudeString = JSON.stringify(item.latitude)
-          var longitudeString = JSON.stringify(item.longitude)
-          var latitudeNumber = Number(latitudeString)
-          var longitudeNumber = Number(longitudeString)
-          var bandeiraString = JSON.stringify(item.bandeira)
-          let localizacao = {
-            nome: item.nome,
-            id: itemString,
-            latitude: latitudeNumber,
-            longitude: longitudeNumber,
-            bandeira: bandeiraString,
-          }
-          listalocais.push(localizacao)
+          listalocais.push(location)
         });
         setListar(listalocais)
       } else {
@@ -80,53 +59,16 @@ const Map = () => {
       showsUserLocation={true}
       zoomEnabled={true}
       >
-
         {listar.map((marker, index) => {
-          if(marker.bandeira === '"Shell"'){
-            return(
-              <Marker
-                icon={require('../../../assets/images/markers/Shell.png')}
-                key={index}
-                coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
-                title={marker.nome}
-                style={styles.marker}
-                />
-             )
-          }
-          else if(marker.bandeira === '"Ipiranga"'){
-            return(
-              <Marker
-                key={index}
-                coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
-                title={marker.nome}
-                icon={require('../../../assets/images/markers/Ipiranga.png')}
-                style={styles.marker}
-                />
-             )
-          }
-          else if(marker.bandeira === '"BR"'){
-            return(
-              <Marker
-                key={index}
-                coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
-                title={marker.nome}
-                icon={require('../../../assets/images/markers/br.png')}
-                style={styles.marker}
-                />
-             )
-          }
-          else if(marker.bandeira === '"Sete Estrelas"'){
-            return(
-              <Marker
-                key={index}
-                coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
-                title={marker.nome}
-                icon={require('../../../assets/images/markers/7estrela.png')}
-                style={styles.marker}
-                />
-             )
-          }
-
+          return(
+            <Marker
+            key={index}
+            coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+            title={marker.nome}
+            icon={imagesPath[marker.bandeira]}
+            style={styles.marker}
+            />
+          )
         })}
       </MapView>        
   );
@@ -149,4 +91,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Map
+export default Map;
