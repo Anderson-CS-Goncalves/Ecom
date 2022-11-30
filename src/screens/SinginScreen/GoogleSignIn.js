@@ -27,7 +27,7 @@ const GoogleSignIn = () => {
                     userName : user.displayName,
                     userPhoto : user.photoURL,
                   }
-                navigation.navigate('Router', {profile})
+                navigation.navigate('Router', {profile});
             }
             else {
               console.warn('erro')

@@ -2,11 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, alert, TouchableOpacity, Image } from 'react-native';
 import '../../components/Translate/i18n'
 import { useTranslation } from 'react-i18next'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const Configs = () => {
     const {t, i18n} = useTranslation();
     const navigation = useNavigation();
+    const userProfile = useContext(UserContext);
 
     return (
       <View style={styles.container}>
@@ -19,9 +22,9 @@ const Configs = () => {
             <Text style={styles.Text}>{t('Configurações')} </Text>
         </View>
   
-        <Image style={styles.perfil} source={{uri: 'https://i.pinimg.com/564x/7e/4f/5c/7e4f5ced8b75dfa364f52a3d7cecd4a3.jpg',}}></Image>
-        <Text style={{fontSize: 17,   fontWeight: 'bold',}}>Matt_Murdock </Text>
-        <Text style={{color: '#BFBFBF', fontSize: 9}}>DemonioDeHellsKitchen@gmail.com</Text>
+        <Image style={styles.perfil} source={{uri: userProfile.userPhoto}}></Image>
+        <Text style={{fontSize: 17,   fontWeight: 'bold',}}>{userProfile.userName}</Text>
+        <Text style={{color: '#BFBFBF', fontSize: 9}}>{userProfile.userEmail}</Text>
         <TouchableOpacity style={styles.Edit} onPress={() =>  navigation.navigate('EditProfile')}><Text style={{color: 'white', fontSize: 20,}}>{t('Editar perfil')} </Text></TouchableOpacity>
   
     <View style={styles.line} />

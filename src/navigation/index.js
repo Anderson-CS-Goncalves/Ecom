@@ -30,13 +30,6 @@ const Navigation = () => {
         <Stack.Screen name='VerificationCodeScreen' component={VerificationCodeScreen} />
         <Stack.Screen name='ChangedPasswordScreen' component={ChangedPasswordScreen} />
         <Stack.Screen name='Router' component={Router}  />
-        <Stack.Screen name='About' component={About}  />
-        <Stack.Screen name='EditProfile' component={EditProfile}  />
-        <Stack.Screen name='Help' component={Help}  />
-        <Stack.Screen name='Language' component={Language}  />
-        <Stack.Screen name='Notifications' component={Notifications}  />
-        <Stack.Screen name='Security' component={Security}  />
-        <Stack.Screen name='HomeScreen' component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

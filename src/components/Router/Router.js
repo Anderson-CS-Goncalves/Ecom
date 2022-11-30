@@ -7,12 +7,17 @@ import Stations from "../../screens/Stations";
 import Saved from "../../screens/Saved";
 import Configs from "../../screens/Configs";
 import AddPrice from "../../screens/AddPrice";
+import { UserContext } from "../../screens/UserContext";
+import { useRoute } from "@react-navigation/native";
 
 
 const Tab = createBottomTabNavigator();
 
 const Router = () => {
+    const route = useRoute()
+
     return(
+        <UserContext.Provider value={route.params.profile}>
         <Tab.Navigator 
         screenOptions={{
             tabBarShowLabel: false,
@@ -114,31 +119,32 @@ const Router = () => {
             
             />
 
-            <Tab.Screen 
-            name="Config" 
-            component={Configs}
-            options={{
-                headerShown: false,
-                tabBarStyle:{display: 'none',},
-                tabBarIcon: ({color, size, focused}) => {
-                    if (focused) {
-                        return <View><Image
-                        style={styles.icon}
-                        source={require('../../../assets/icons/config.png')}/>
-                        <View style={styles.line} />
-                        </View>
+ 
+                <Tab.Screen 
+                name="Configs" 
+                component={Configs}
+                options={{
+                    headerShown: false,
+                    tabBarStyle:{display: 'none',},
+                    tabBarIcon: ({color, size, focused}) => {
+                        if (focused) {
+                            return <View><Image
+                            style={styles.icon}
+                            source={require('../../../assets/icons/config.png')}/>
+                            <View style={styles.line} />
+                            </View>
+                        }
+
+                        return <Image
+                        style={styles.iconF}
+                        source={require('../../../assets/icons/config.png')}
+                        />
                     }
-
-                    return <Image
-                    style={styles.iconF}
-                    source={require('../../../assets/icons/config.png')}
-                    />
-                }
-                }}
-            
-            />
-
+                    }}
+                
+                />
         </Tab.Navigator>
+        </UserContext.Provider>
     );
   }
 
