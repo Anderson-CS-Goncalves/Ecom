@@ -3,17 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 import '../../../components/Translate/i18n'
 import { useTranslation } from 'react-i18next'
+import BackPreviousScreen from '../../../components/BackPreviousScreen';
 
 const Help = () => {
       const {t, i18n} = useTranslation();
   return (
     <View style={styles.container}>
-      <View style={styles.IconSobre}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Image style={styles.icon} source={{uri: 'https://s3-alpha-sig.figma.com/img/e5c9/0f27/d0b2b78fba43bd52551b2cdd8a1e4967?Expires=1666569600&Signature=X84gvhoXajTbB7SeuGDMewxj7pTBwEr470nlk26Plfa5stP715ahvfaY2lsZlIVd2jZpXHOMS5EQJEMtJ3zFLNrkaMmLk1YZdfAs897o-ckBIhDC7Sp4Wi7BIUpru6fIaiqGKHznFsRboAxckQFp62cicOuVeBKIZTH6lIg~oKOnMIxd4EZfzZ4oQFQXUFc7qjwecxXpfxDGS8cI~mqfr80ZH-o0ccoQi1UttRWgcmR1iOpyFklzj-dCYRr1m8oL7feGzP~uL3zA3E0F4TliVAaSoUdHfVJunLE56wUst8YQc6sO16oOj92DetJ5ASwAd7h5Llu38vRRkI-Lmhg0Sg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',}}></Image>
-          </TouchableOpacity>
-          <Text style={styles.Text}>{t('Ajuda')} </Text>
-      </View>
+      <BackPreviousScreen text="Ajuda"/>
 
           <Image style={styles.perfil} source={{uri: 'https://cdn-icons-png.flaticon.com/512/18/18436.png',}}></Image>
           <Text style={{fontSize: 22,   fontWeight: 'bold',}}> {t('AJUDA')} </Text>

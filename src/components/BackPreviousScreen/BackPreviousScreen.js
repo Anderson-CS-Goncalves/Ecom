@@ -7,10 +7,8 @@ const BackPreviousScreen = ({text, onPress}) => {
 
     const navigation = useNavigation();
 
-    const onBackPressed = () => {
-        console.warn('teste')   
+    const onBackPressed = () => { 
         navigation.goBack()
-        
     };
 
     return (

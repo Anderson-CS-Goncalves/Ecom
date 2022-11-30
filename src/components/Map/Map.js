@@ -66,7 +66,6 @@ const Map = () => {
             coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
             title={marker.nome}
             icon={imagesPath[marker.bandeira]}
-            style={styles.marker}
             />
           )
         })}
@@ -85,10 +84,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
-  marker: {
-    height: 24,
-    width: 24
-  }
 });
 
 export default Map;

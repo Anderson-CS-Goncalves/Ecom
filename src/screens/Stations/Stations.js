@@ -28,22 +28,6 @@ const Stations = () => {
     const [listar, setListar] = useState([]);
     const [opa, setOpa] = useState(false)
 
-  useEffect(() => {
-    if(searchText === '') {
-      setFilteredData(listar)
-    } else {
-       setFilteredData(
-        listar.filter((item) => {
-          if(item.nome.indexOf(searchText) > -1) {
-            return true;
-          } else {
-            return false;
-          }
-        })
-       );
-    }
-  }, [searchText]);
-  
   useEffect(()=>{
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -99,7 +83,7 @@ const Stations = () => {
         <View style={styles.container}>
         <StatusBar backgroundColor='#e0e0e0' style="auto" />
 
-        {loading ? filteredData.map((marker, index) => {
+        {loading ? listar.map((marker, index) => {
             return( 
             <Cards 
               key={index}
